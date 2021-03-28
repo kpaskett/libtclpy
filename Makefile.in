@@ -237,7 +237,7 @@ install-doc: doc
 	done
 
 test: binaries libraries
-	$(TCLSH) `@CYGPATH@ $(srcdir)/tests/all.tcl` $(TESTFLAGS) \
+	$(TCLSH) `@CYGPATH@ $(srcdir)/tests/tclpy.test` $(TESTFLAGS) \
 		-load "package ifneeded ${PACKAGE_NAME} ${PACKAGE_VERSION} \
 			[list load `@CYGPATH@ $(PKG_LIB_FILE)` $(PACKAGE_NAME)]"
 
@@ -252,7 +252,7 @@ VALGRINDARGS =	--tool=memcheck --num-callers=8 --leak-resolution=high \
 
 valgrind: binaries libraries
 	$(TCLSH_ENV) valgrind $(VALGRINDARGS) $(TCLSH_PROG) \
-		`@CYGPATH@ $(srcdir)/tests/all.tcl` $(TESTFLAGS)
+		`@CYGPATH@ $(srcdir)/tests/tclpy.test` $(TESTFLAGS)
 
 valgrindshell: binaries libraries
 	$(TCLSH_ENV) valgrind $(VALGRINDARGS) $(TCLSH_PROG) $(SCRIPT)
